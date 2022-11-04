@@ -5,6 +5,8 @@ using UnityEngine;
 public class Robot : MonoBehaviour
 {
     [SerializeField]
+    GameObject missileprefab;
+    [SerializeField]
     private string robotType;
     public int health;
     public int range;
@@ -32,15 +34,13 @@ public class Robot : MonoBehaviour
         {
             return;
         }
-        // 3
+        
         transform.LookAt(player);
-        // 4
+        
         agent.SetDestination(player.position);
-        // 5
-        if (Vector3.Distance(transform.position, player.position) < range
-        && Time.time - timeLastFired > fireRate)
+        
+        if (Vector3.Distance(transform.position, player.position) < range && Time.time - timeLastFired > fireRate)
         {
-            // 6
             timeLastFired = Time.time;
             fire();
         }
@@ -48,6 +48,9 @@ public class Robot : MonoBehaviour
 
     private void fire()
     {
+        GameObject missile = Instantiate(missileprefab);
+        missile.transform.position = missileFireSpot.transform.position;
+        missile.transform.rotation = missileFireSpot.transform.rotation;
         robot.Play("Fire");
     }
 }
