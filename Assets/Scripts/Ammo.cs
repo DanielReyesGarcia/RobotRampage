@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 
 public class Ammo : MonoBehaviour
 {
@@ -60,6 +60,7 @@ public class Ammo : MonoBehaviour
             Debug.LogError("Unrecognized gun type passed:" + tag);
         }
         tagToAmmo[tag]--;
+        gameUI.SetAmmoText(tagToAmmo[tag]);
     }
 
 
